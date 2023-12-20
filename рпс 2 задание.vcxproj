@@ -134,6 +134,7 @@
     <ClCompile Include="ModuleTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enum.h" />
     <ClInclude Include="GeneralFunction.h" />
     <ClInclude Include="ISort.h" />
     <ClInclude Include="MenuInterface.h" />
