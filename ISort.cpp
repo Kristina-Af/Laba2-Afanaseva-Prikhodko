@@ -2,7 +2,6 @@
 
 using namespace std;
 
-// Сортировка вставками
 void InsertSort::Sort(int** array, int strings, int columns) {
 	for (int i = 0; i < strings; i++) {
 		for (int j = 0; j < columns - 1; j++) {
