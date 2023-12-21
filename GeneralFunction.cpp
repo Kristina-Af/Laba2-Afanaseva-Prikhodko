@@ -2,8 +2,8 @@
 
 using namespace std;
 
-//Проверка пользовательского ввода числа
-int CheckInt() {
+
+int CheckInt() { //Проверка пользовательского ввода числа
 	int tmp = 0;
 	cin >> tmp;
 	while (cin.fail()) {//функция в стандартной библиотеке C++, которая позволяет нам проверить, успешно ли прошло чтение данных из стандартного ввода
@@ -16,8 +16,8 @@ int CheckInt() {
 	return tmp;
 }
  
-//Проверка на пустой ввод строки.
-string ReadStringWithoutWhitespace() {
+
+string ReadStringWithoutWhitespace() { //Проверка на пустой ввод строки
 	string input;
 	while (true) {
 		getline(cin, input);  //Чтобы считать всю строку, можно применить метод `getline()`. Он принимает два объекта — `std::cin` и переменную, в которую надо считать строку.
@@ -31,8 +31,8 @@ string ReadStringWithoutWhitespace() {
 	}
 }
 
-//проверка файла
-bool File_Exists(string fileName) { //проверяет существование указанного файла или каталога 
+
+bool FileExists(string fileName) { //проверяет существование указанного файла или каталога 
 	const char* path = fileName.c_str();
 	if (!_access(path, 0)) { //access - Проверка прав доступа к файлу.
 		return true;
@@ -42,8 +42,8 @@ bool File_Exists(string fileName) { //проверяет существование указанного файла и
 	}
 }
 
-//чтение из файла
-bool Only_Read(string fileName) {
+
+bool OnlyRead(string fileName) {
 	const char* path = fileName.c_str(); //Функция c_str () возвращает указатель на символьный массив, который содержит строку объекта стринг (string) в том виде, в котором она размещалась бы, во встроенном строковом типе.
 	if (_access(path, 2)) {
 		return true;
@@ -52,14 +52,14 @@ bool Only_Read(string fileName) {
 		return false;
 }
 
-//проверка на допустимые имена
-bool IsValidFilename(const string& filename) {
+
+bool IsValidFileName(const string& filename) {
 	static const regex pattern("^[a-zA-Z0-9_\\-\\.]+$");
 	return regex_match(filename, pattern);
 }
 
-//полученние имени файла
-string getFilename(const string path) {
+
+string GetFileName(const string path) {
 	size_t pos = path.find_last_of("\\"); // Ищем последний символ '/' или '\'
 	if (pos != string::npos) { // Если символ найден
 		return path.substr(pos + 1); // Возвращаем имя файла после найденного символа
@@ -67,7 +67,7 @@ string getFilename(const string path) {
 	return path; // Если символ не найден, возвращаем исходный путь
 }
 
-//проверка на зарезервированные имена
+
 bool IsReservedFileName(string fileName) {
 	const int quantityOfReservedNames = 22;
 	string ReservedNames[quantityOfReservedNames] = { "con", "prn" , "aux" , "nul" , "com1" , "com2" , "com3" , "com4" , "com5" , "com6" , "com7" , "com8" , "com9" ,
@@ -86,7 +86,7 @@ bool IsReservedFileName(string fileName) {
 	return false;
 }
 
-//копирование массива
+
 void CopyArray(int** copyArray, int** array, int rows, int columns) {
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < columns; j++) {
@@ -95,7 +95,7 @@ void CopyArray(int** copyArray, int** array, int rows, int columns) {
 	}
 }
 
-//печать массива
+
 void PrintArray(int** array, int rows, int columns) {
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < columns; j++) {
