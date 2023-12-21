@@ -10,7 +10,7 @@ public:
 	/// Сортировка вставками
 	/// </summary>
 	/// <param name="array"></param>
-	/// <param name="strings"></param>
+	/// <param name="rows"></param>
 	/// <param name="columns"></param>
 	virtual void Sort(int** array, int rows, int columns) = 0;
 	virtual ~ISort() = default; //virtual - используется для освобождения ресурсов, используемых объектом производного класса, когда он удаляется из памяти.
@@ -22,7 +22,7 @@ public:
 	/// Сортировка вставками
 	/// </summary>
 	/// <param name="array"></param>
-	/// <param name="strings"></param>
+	/// <param name="rows"></param>
 	/// <param name="columns"></param>
 	void Sort(int** array, int rows, int columns) override;
 };
