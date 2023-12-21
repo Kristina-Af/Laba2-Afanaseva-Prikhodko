@@ -30,32 +30,42 @@ void CompleteModuleTests() {
 			initial.open(initialPaths[t]);
 			final.open(finalPaths[t]);
 			int input = 0;
+
 			while (!initial.eof()) {
 				if ((input = initial.get()) == '\n' || input == EOF) { initialRows += 1; }
 			}
+
 			initial.clear();
 			initial.seekg(0);
 			getline(initial, temp);
 			istringstream stream(temp);
+
 			while (stream >> value) {
 				initialColumns++;
 			}
+
 			initial.clear();
 			initial.seekg(0);
 			initialArray = new int* [initialRows];
+
 			for (int i = 0; i < initialRows; i++) {
 				initialArray[i] = new int[initialColumns];
 			}
+
 			final >> finalRows;
 			final >> finalColumns;
 			finalArray = new int* [finalRows];
+
 			for (int i = 0; i < finalRows; i++) {
 				finalArray[i] = new int[finalColumns];
 			}
+
 			sortedArray = new int* [initialRows];
+
 			for (int i = 0; i < initialRows; i++) {
 				sortedArray[i] = new int[initialColumns];
 			}
+
 			if (initialRows != finalRows || initialColumns != finalColumns) {
 				cout << "Количество строк или столбцов матрицы в " << initialPaths[t] << " не соответствует количеству строк или столбцов " << finalPaths[t] << endl;
 				completeTests = false;
@@ -66,13 +76,16 @@ void CompleteModuleTests() {
 						initial >> initialArray[i][j];
 					}
 				}
+
 				for (int i = 0; i < finalRows; i++) {
 					for (int j = 0; j < finalColumns; j++) {
 						final >> finalArray[i][j];
 					}
 				}
+
 				CopyArray(sortedArray, initialArray, initialRows, initialColumns);
 				c.Sort(sortedArray, initialRows, initialColumns);
+
 				for (int i = 0; i < initialRows; i++) {
 					for (int j = 0; j < initialColumns; j++) {
 						if (sortedArray[i][j] != finalArray[i][j]) {
@@ -80,6 +93,7 @@ void CompleteModuleTests() {
 						}
 					}
 				}
+
 				if (!insertCorrect) {
 					completeTests = false;
 					cout << "Сортировка вставками работает некорректно." << endl;
@@ -90,22 +104,28 @@ void CompleteModuleTests() {
 				}
 				CopyArray(sortedArray, initialArray, initialRows, initialColumns);
 			}
+
 			for (int i = 0; i < initialRows; i++) {
 				delete[] initialArray[i];
 				initialArray[i] = nullptr;
 			}
+
 			delete[] initialArray;
 			initialArray = nullptr;
+
 			for (int i = 0; i < initialRows; i++) {
 				delete[] sortedArray[i];
 				sortedArray[i] = nullptr;
 			}
+
 			delete[] sortedArray;
 			sortedArray = nullptr;
+
 			for (int i = 0; i < finalRows; i++) {
 				delete[] finalArray[i];
 				finalArray[i] = nullptr;
 			}
+
 			delete[] finalArray;
 			finalArray = nullptr;
 			final.close();
