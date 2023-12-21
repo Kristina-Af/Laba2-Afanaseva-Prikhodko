@@ -38,7 +38,7 @@ void InputMethodMenu() {
 		case FromFile:
 			cout << "Введите путь файла:" << endl << "> ";
 			path = ReadStringWithoutWhitespace();
-			while (!File_Exists(path)) {
+			while (!FileExists(path)) {
 				cout << "Ошибка при открытии файла! Попробуйте ввести путь снова." << endl << "> ";
 				path = ReadStringWithoutWhitespace();
 			}

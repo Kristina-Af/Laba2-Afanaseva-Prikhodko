@@ -11,7 +11,7 @@ void CompleteModuleTests() {
 	string finalPaths[NumberOfTests] = { "ABC_1.txt", "ABC_2.txt", "ABC_3.txt", "ABC_4.txt", "ABC_5.txt" };
 
 	for (int i = 0; i < NumberOfTests; i++) {
-		if (!File_Exists(initialPaths[i]) || !File_Exists(finalPaths[i])) {
+		if (!FileExists(initialPaths[i]) || !FileExists(finalPaths[i])) {
 			filesExists = false;
 		}
 	}
