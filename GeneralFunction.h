@@ -1,11 +1,11 @@
 #pragma once
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream> //ƒл€ работы с Istringstream необходимо подключить заголовочный файл <sstream>. 
-#include <limits>
-#include <io.h>
-#include <regex>
+#include <iostream>//чтение и запись потока данных
+#include <fstream> //определение нескольких классов, поддерживающих операции iostreams дл€ последовательностей, хран€щихс€ во внешних файлах
+#include <string> //работа со строками
+#include <sstream> //дл€ работы с Istringstream необходимо подключить заголовочный файл <sstream>. 
+#include <limits> //информаци€ о различных характеристиках числовых типов данных
+#include <io.h> //дл€ работы с вводом и выводом
+#include <regex> //дл€ работы с регул€рными выражени€ми, это шаблоны используемые дл€ поиска и обработки текстовой информации
 
 using namespace std;
 
