@@ -1,65 +1,74 @@
-#pragma once
-#include <iostream>//чтение и запись потока данных
-#include <fstream> //определение нескольких классов, поддерживающих операции iostreams для последовательностей, хранящихся во внешних файлах
-#include <string> //работа со строками
-#include <sstream> //для работы с Istringstream необходимо подключить заголовочный файл <sstream>. 
-#include <limits> //информация о различных характеристиках числовых типов данных
-#include <io.h> //для работы с вводом и выводом
-#include <regex> //для работы с регулярными выражениями, это шаблоны используемые для поиска и обработки текстовой информации
+п»ї#pragma once
+#include <iostream>//С‡С‚РµРЅРёРµ Рё Р·Р°РїРёСЃСЊ РїРѕС‚РѕРєР° РґР°РЅРЅС‹С…
+#include <fstream> //РѕРїСЂРµРґРµР»РµРЅРёРµ РЅРµСЃРєРѕР»СЊРєРёС… РєР»Р°СЃСЃРѕРІ, РїРѕРґРґРµСЂР¶РёРІР°СЋС‰РёС… РѕРїРµСЂР°С†РёРё iostreams РґР»СЏ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚РµР№, С…СЂР°РЅСЏС‰РёС…СЃСЏ РІРѕ РІРЅРµС€РЅРёС… С„Р°Р№Р»Р°С…
+#include <string> //СЂР°Р±РѕС‚Р° СЃРѕ СЃС‚СЂРѕРєР°РјРё
+#include <sstream> //РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Istringstream РЅРµРѕР±С…РѕРґРёРјРѕ РїРѕРґРєР»СЋС‡РёС‚СЊ Р·Р°РіРѕР»РѕРІРѕС‡РЅС‹Р№ С„Р°Р№Р» <sstream>. 
+#include <limits> //РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ СЂР°Р·Р»РёС‡РЅС‹С… С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°С… С‡РёСЃР»РѕРІС‹С… С‚РёРїРѕРІ РґР°РЅРЅС‹С…
+#include <io.h> //РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РІРІРѕРґРѕРј Рё РІС‹РІРѕРґРѕРј
+#include <regex> //РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ СЂРµРіСѓР»СЏСЂРЅС‹РјРё РІС‹СЂР°Р¶РµРЅРёСЏРјРё, СЌС‚Рѕ С€Р°Р±Р»РѕРЅС‹ РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ РґР»СЏ РїРѕРёСЃРєР° Рё РѕР±СЂР°Р±РѕС‚РєРё С‚РµРєСЃС‚РѕРІРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 
 using namespace std;
 
+/// <summary>
+/// РїСЂРѕРІРµСЂРєР° РЅР° С‚РёРї РґР°РЅРЅС‹С…
+/// </summary>
+/// <returns>С„Р»Р°Рі РїСЂРѕРІРµСЂРєРё РЅР° С‚РёРї РґР°РЅРЅС‹С…</returns>
 int CheckInt();
+
+/// <summary>
+/// РїСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕР№ РІРІРѕРґ
+/// </summary>
+/// <returns>С„Р»Р°Рі РїСЂРѕРІРµСЂРєРё РЅР° РїСѓСЃС‚РѕР№ РІРІРѕРґ</returns>
 string ReadStringWithoutWhitespace();
 
 /// <summary>
-/// Проверка файла
+/// РџСЂРѕРІРµСЂРєР° С„Р°Р№Р»Р° РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ
 /// </summary>
-/// <param name="fileName"></param>
-/// <returns></returns>
+/// <param name="fileName">РёРјСЏ С„Р°Р№Р»Р°</param>
+/// <returns>С„Р»Р°Рі РїСЂРѕРІРµСЂРєРё С„Р°Р№Р»Р° РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ</returns>
 bool FileExists(string fileName);
 
 /// <summary>
-/// Чтение из файла
+/// Р§С‚РµРЅРёРµ РёР· С„Р°Р№Р»Р° 
 /// </summary>
-/// <param name="fileName"></param>
-/// <returns></returns>
+/// <param name="fileName">РёРјСЏ С„Р°Р№Р»Р°</param>
+/// <returns>С„Р»Р°Рі С‡С‚РµРЅРёСЏ РёР· С„Р°Р№Р»Р°</returns>
 bool OnlyRead(string fileName);
 
 /// <summary>
-/// Проверка на допустимые имена
+/// РџСЂРѕРІРµСЂРєР° РЅР° РґРѕРїСѓСЃС‚РёРјС‹Рµ РёРјРµРЅР°
 /// </summary>
-/// <param name="fileName"></param>
-/// <returns></returns>
+/// <param name="fileName">РёРјСЏ С„Р°Р№Р»Р°</param>
+/// <returns>С„Р»Р°Рі РїСЂРѕРІРµСЂРєРё РёРјРµРЅРё</returns>
 bool IsValidFileName(const string& fileName);
 
 /// <summary>
-/// Полученние имени файла
+/// РџРѕР»СѓС‡РµРЅРЅРёРµ РёРјРµРЅРё С„Р°Р№Р»Р°
 /// </summary>
-/// <param name="path"></param>
-/// <returns></returns>
+/// <param name="path">РїСѓС‚СЊ</param>
+/// <returns>С„Р»Р°Рі РїРѕР»СѓС‡РµРЅРёСЏ РёРјРµРЅРё С„Р°Р№Р»Р°</returns>
 string GetFileName(const string path);
 
 /// <summary>
-/// Проверка на зарезервированные имена
+/// РџСЂРѕРІРµСЂРєР° РЅР° Р·Р°СЂРµР·РµСЂРІРёСЂРѕРІР°РЅРЅС‹Рµ РёРјРµРЅР°
 /// </summary>
-/// <param name="fileName"></param>
-/// <returns></returns>
+/// <param name="fileName">РёРјСЏ С„Р°Р№Р»Р°</param>
+/// <returns>С„Р»Р°Рі РїСЂРѕРІРµСЂРєРё РЅР° Р·Р°СЂРµР·РµСЂРІРёСЂРѕРІР°РЅРЅС‹Рµ РёРјРµРЅР°</returns>
 bool IsReservedFileName(string fileName);
 
 /// <summary>
-/// Копирование массива
+/// РљРѕРїРёСЂРѕРІР°РЅРёРµ РјР°СЃСЃРёРІР°
 /// </summary>
-/// <param name="copyArray"></param>
-/// <param name="array"></param>
-/// <param name="rows"></param>
-/// <param name="columns"></param>
+/// <param name="copyArray">РјР°СЃСЃРёРІ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ</param>
+/// <param name="array">РјР°СЃСЃРёРІ</param>
+/// <param name="rows">СЃС‚СЂРѕРєРё</param>
+/// <param name="columns">СЃС‚РѕР»Р±С†С‹</param>
 void CopyArray(int** copyArray, int** array, int rows, int columns);
 
 /// <summary>
-/// Печать массива
+/// РџРµС‡Р°С‚СЊ РјР°СЃСЃРёРІР°
 /// </summary>
-/// <param name="array"></param>
-/// <param name="rows"></param>
-/// <param name="columns"></param>
+/// <param name="array">РјР°СЃСЃРёРІ</param>
+/// <param name="rows">СЃС‚СЂРѕРєРё</param>
+/// <param name="columns">СЃС‚РѕР»Р±С†С‹</param>
 void PrintArray(int** array, int rows, int columns);
