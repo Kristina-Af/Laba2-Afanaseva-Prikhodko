@@ -201,6 +201,7 @@ void CompleteControlWork(int** array, int rows, int columns) {
 
 void StartProgram() {
 	setlocale(LC_ALL, "RU");
+	system("chcp 1251");
 	srand(static_cast<unsigned int>(time(NULL)));
 	int userChoise = 0;
 	do {
