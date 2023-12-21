@@ -11,10 +11,10 @@ using namespace std;
 
 int CheckInt();
 string ReadStringWithoutWhitespace();
-bool File_Exists(string FileName);
-bool Only_Read(string FileName);
-bool IsValidFilename(const string& filename);
+bool File_Exists(string fileName);
+bool Only_Read(string fileName);
+bool IsValidFilename(const string& fileName);
 string getFilename(const string path);
-bool IsReservedFileName(string FileName);
-void CopyArray(int** copyarray, int** array, int strings, int columns);
-void PrintArray(int** array, int strings, int columns);
+bool IsReservedFileName(string fileName);
+void CopyArray(int** copyArray, int** array, int rows, int columns);
+void PrintArray(int** array, int rows, int columns);

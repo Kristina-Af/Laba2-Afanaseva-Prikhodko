@@ -32,8 +32,8 @@ string ReadStringWithoutWhitespace() {
 }
 
 //проверка файла
-bool File_Exists(string FileName) { //проверяет существование указанного файла или каталога 
-	const char* path = FileName.c_str();
+bool File_Exists(string fileName) { //проверяет существование указанного файла или каталога 
+	const char* path = fileName.c_str();
 	if (!_access(path, 0)) { //access - Проверка прав доступа к файлу.
 		return true;
 	}
@@ -43,8 +43,8 @@ bool File_Exists(string FileName) { //проверяет существование указанного файла и
 }
 
 //чтение из файла
-bool Only_Read(string FileName) {
-	const char* path = FileName.c_str(); //Функция c_str () возвращает указатель на символьный массив, который содержит строку объекта стринг (string) в том виде, в котором она размещалась бы, во встроенном строковом типе.
+bool Only_Read(string fileName) {
+	const char* path = fileName.c_str(); //Функция c_str () возвращает указатель на символьный массив, который содержит строку объекта стринг (string) в том виде, в котором она размещалась бы, во встроенном строковом типе.
 	if (_access(path, 2)) {
 		return true;
 	}
@@ -68,18 +68,18 @@ string getFilename(const string path) {
 }
 
 //проверка на зарезервированные имена
-bool IsReservedFileName(string FileName) {
-	const int QuantityOfReservedNames = 22;
-	string ReservedNames[QuantityOfReservedNames] = { "con", "prn" , "aux" , "nul" , "com1" , "com2" , "com3" , "com4" , "com5" , "com6" , "com7" , "com8" , "com9" ,
+bool IsReservedFileName(string fileName) {
+	const int quantityOfReservedNames = 22;
+	string ReservedNames[quantityOfReservedNames] = { "con", "prn" , "aux" , "nul" , "com1" , "com2" , "com3" , "com4" , "com5" , "com6" , "com7" , "com8" , "com9" ,
 	"lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9" };
 
-	size_t pos = FileName.find_first_of(".");
+	size_t pos = fileName.find_first_of(".");
 	if (pos != string::npos) { //string::npo - Эта константа часто используется для индикации отсутствия позиции символа или подстроки в строке.
-		FileName = FileName.substr(0, pos); //для извлечения подстрок из определенной строки - substr()
+		fileName = fileName.substr(0, pos); //для извлечения подстрок из определенной строки - substr()
 	}
 
-	for (int i = 0; i < QuantityOfReservedNames; i++) {
-		if (_stricmp(FileName.c_str(), ReservedNames[i].c_str()) == 0) { //функция stricmp() осуществляет лексикографическое сравнение двух строк, оканчивающихся нулевыми символами.
+	for (int i = 0; i < quantityOfReservedNames; i++) {
+		if (_stricmp(fileName.c_str(), ReservedNames[i].c_str()) == 0) { //функция stricmp() осуществляет лексикографическое сравнение двух строк, оканчивающихся нулевыми символами.
 			return true;
 		}
 	}
@@ -87,17 +87,17 @@ bool IsReservedFileName(string FileName) {
 }
 
 //копирование массива
-void CopyArray(int** copyarray, int** array, int strings, int columns) {
-	for (int i = 0; i < strings; i++) {
+void CopyArray(int** copyArray, int** array, int rows, int columns) {
+	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < columns; j++) {
-			copyarray[i][j] = array[i][j];
+			copyArray[i][j] = array[i][j];
 		}
 	}
 }
 
 //печать массива
-void PrintArray(int** array, int strings, int columns) {
-	for (int i = 0; i < strings; i++) {
+void PrintArray(int** array, int rows, int columns) {
+	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < columns; j++) {
 			cout << array[i][j] << '\t';
 		}
