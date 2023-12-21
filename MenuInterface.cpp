@@ -21,7 +21,7 @@ void InputMethodMenu() {
 	int rows = 0;
 	int columns = 0;
 	int input = 0;
-	int intTmp; //intTmp - используется для временного хранения считанного значения из файла
+	int fileValue; //intTmp - используется для временного хранения считанного значения из файла
 	string line; //хранение строки при считывании из файла
 	string path;
 	string value; // переменная, в которую считывается значение из файла
@@ -51,7 +51,7 @@ void InputMethodMenu() {
 			}
 			else {
 				while (!file.eof()) {
-					file >> intTmp;
+					file >> fileValue;
 
 					if (file.fail()) { //проверка ошибки при чтении файла
 						file.clear();
