@@ -63,7 +63,7 @@ bool IsReservedFileName(string fileName);
 /// <param name="array">массив</param>
 /// <param name="rows">строки</param>
 /// <param name="columns">столбцы</param>
-void CopyArray(int** copyArray, int** array, int rows, int columns);
+void CopyArray(int* copyArray, int* array, int size);
 
 /// <summary>
 /// Печать массива
@@ -71,4 +71,4 @@ void CopyArray(int** copyArray, int** array, int rows, int columns);
 /// <param name="array">массив</param>
 /// <param name="rows">строки</param>
 /// <param name="columns">столбцы</param>
-void PrintArray(int** array, int rows, int columns);
+void PrintArray(int* array, int size);
