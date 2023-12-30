@@ -2,14 +2,19 @@
 
 using namespace std;
 
-void InsertSort::Sort(int** array, int rows, int columns) {
-	for (int i = 0; i < rows; i++) {
-		for (int j = 0; j < columns - 1; j++) {
-			for (int k = j + 1; k > 0; k--) {
-				if (array[i][k] < array[i][k - 1]) {
-					swap(array[i][k], array[i][k - 1]);
-				}
-			}
-		}
-	}
+void InsertSort::Sort(int* array, int size) {
+    int tmp, // временная переменная для хранения значения элемента сортируемого массива
+        item; // индекс предыдущего элемента
+    for (int i = 0; i < size; i++)
+    {
+        tmp = array[i]; // инициализируем временную переменную текущим значением элемента массива
+        item = i - 1; // запоминаем индекс предыдущего элемента массива
+        while (item >= 0 && array[item] > tmp)
+        {
+            array[item + 1] = array[item];
+            array[item] = tmp;
+            item--;
+        }
+
+    }
 }

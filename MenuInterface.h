@@ -19,7 +19,7 @@ void InputMethodMenu();
 /// <param name="array">массив</param>
 /// <param name="rows">строки</param>
 /// <param name="columns">столбцы</param>
-void CompleteControlWork(int** array, int rows, int columns);
+void CompleteControlWork(int* array, int size);
 
 /// <summary>
 /// начало программы

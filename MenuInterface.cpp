@@ -18,31 +18,33 @@ void ShowGreeting()
 
 void InputMethodMenu() {
 	bool fileIsCorrect = true;
-	int rows = 0;
-	int columns = 0;
+	int size = 0;
 	int input = 0;
-	int fileValue; //intTmp - используется для временного хранения считанного значения из файла
-	string line; //хранение строки при считывании из файла
+	int intTmp;
+	string temp;
 	string path;
-	string value; // переменная, в которую считывается значение из файла
-	int* tmpIntArray = nullptr; //nullptr - константа нулевого указателя, для хранения целочисленного значения массива
-	int** array = nullptr;
+	string value;
+	int* tmp = nullptr; //nullptr - константа нулевого указателя
+	int* array = nullptr;
 	ifstream file;
 	int choseMethod = 0;
+
 	do {
 		cout << "Выберите способ ввода данных:" << endl << "1 - Заполнение массива из файла." << endl
 			<< "2 - Заполнение массива вручную." << endl << "3 - Заполнение массива случайными числами в диапазоне от -100 до 100." << endl
 			<< "4 - Выход в главное меню программы." << endl << ">> ";
 		choseMethod = CheckInt();
+
 		switch (choseMethod) {
 		case FromFile:
-			cout << "Введите путь файла:" << endl << "> ";
+			cout << "Введите путь файла:" << endl << ">> ";
 			path = ReadStringWithoutWhitespace();
 
 			while (!FileExists(path)) {
 				cout << "Ошибка при открытии файла! Попробуйте ввести путь снова." << endl << "> ";
 				path = ReadStringWithoutWhitespace();
 			}
+
 			file.open(path);
 			cout << "Файл успешно открыт!" << endl;
 
@@ -51,46 +53,46 @@ void InputMethodMenu() {
 			}
 			else {
 				while (!file.eof()) {
-					file >> fileValue;
-
+					file >> intTmp;
 					if (file.fail()) { //проверка ошибки при чтении файла
 						file.clear();
 						fileIsCorrect = false;
 						break;
 					}
 				}
+
 				file.clear();
 				file.seekg(0);
 
 				while (!file.eof()) {
-					if ((input = file.get()) == '\n' || input == EOF) { rows += 1; } //eof - возвращает ненулевое значение
+					if ((input = file.get()) == '\n' || input == EOF) { size += 1; } //eof - возвращает ненулевое значение
 				}
+
 				file.clear();
 				file.seekg(0); //file.seekg - позволяет искать произвольную позицию в файле.
-				tmpIntArray = new int[rows];
+				tmp = new int[size];
 
-				for (int i = 0; i < rows; i++) {
-					tmpIntArray[i] = 0;
-					getline(file, line);
-					istringstream stream(line);
+				for (int i = 0; i < size; i++) {
+					tmp[i] = 0;
+					getline(file, temp);
+					istringstream stream(temp); //istringstream - преобразование строк в поток данных
 
 					while (stream >> value) {
-						tmpIntArray[i]++;
+						tmp[i]++;
 					}
-					columns = tmpIntArray[i];
 				}
 
 				file.clear();
 				file.seekg(0);
 
-				for (int i = 0; i < rows - 1; i++) {
-					if (tmpIntArray[i] != tmpIntArray[i + 1]) {
+				for (int i = 0; i < size - 1; i++) {
+					if (tmp[i] != tmp[i + 1]) {
 						fileIsCorrect = false;
 					}
 				}
 
-				delete[] tmpIntArray;
-				tmpIntArray = nullptr;
+				delete[] tmp;
+				tmp = nullptr;
 
 				if (!fileIsCorrect) {
 					cout << "В файле содержится некорректно заполненная матрица. Исправьте файл и попробуйте еще раз." << endl;
@@ -99,18 +101,13 @@ void InputMethodMenu() {
 					break;
 				}
 
-				array = new int* [rows];
+				array = new int[size];
 
-				for (int i = 0; i < rows; i++) {
-					array[i] = new int[columns];
+				for (int i = 0; i < size; i++) {
+					file >> array[i];
 				}
 
-				for (int i = 0; i < rows; i++) {
-					for (int j = 0; j < columns; j++) {
-						file >> array[i][j];
-					}
-				}
-				CompleteControlWork(array, rows, columns);
+				CompleteControlWork(array, size);
 			}
 
 			file.close();
@@ -119,53 +116,38 @@ void InputMethodMenu() {
 
 		case ManualMethod:
 			cout << "Введите размер массива: ";
-			rows = CheckInt();
-			while (rows < 1) {
+			size = CheckInt();
+			while (size < 1) {
 				cout << "Количество строк не может быть меньше нуля. Попробуйте ввести другое число." << endl;
-				rows = CheckInt();
-			}
-			columns = rows;
-
-			array = new int* [rows];
-			for (int i = 0; i < rows; i++) {
-				array[i] = new int[columns];
+				size = CheckInt();
 			}
 
-			for (int i = 0; i < rows; i++) {
-				for (int j = 0; j < columns; j++) {
-					cout << "Ввод " << i + 1 << " строки " << j + 1 << " столбца." << endl;
-					array[i][j] = CheckInt();
-				}
+			array = new int[size];
+
+			for (int i = 0; i < size; i++) {
+				cout << "Ввод " << i + 1 << " числа " << endl;
+				array[i] = CheckInt();
 			}
-			CompleteControlWork(array, rows, columns);
+
+			CompleteControlWork(array, size);
 			choseMethod = ReturnMenu;
 			break;
 
 		case RandomMethod:
-			cout << "Введите количество строк массива: ";
-			rows = CheckInt();
-			while (rows < 1) {
-				cout << "Количество строк не может быть меньше нуля. Попробуйте ввести другое число." << endl;
-				rows = CheckInt();
-			}
-			cout << "Введите количество столбцов массива: ";
-			columns = CheckInt();
-			while (columns < 1) {
-				cout << "Количество столбцов не может быть меньше нуля. Попробуйте ввести другое число." << endl;
-				columns = CheckInt();
+			cout << "Введите количество чисел массива: ";
+			size = CheckInt();
+
+			while (size < 1) {
+				cout << "Количество чисел не может быть меньше нуля. Попробуйте ввести другое число." << endl;
+				size = CheckInt();
 			}
 
-			array = new int* [rows];
-			for (int i = 0; i < rows; i++) {
-				array[i] = new int[columns];
-			}
+			array = new int[size];
 
-			for (int i = 0; i < rows; i++) {
-				for (int j = 0; j < columns; j++) {
-					array[i][j] = -100 + rand() % 201;
-				}
+			for (int i = 0; i < size; i++) {
+				array[i] = -100 + rand() % 201;
 			}
-			CompleteControlWork(array, rows, columns);
+			CompleteControlWork(array, size);
 			choseMethod = ReturnMenu;
 			break;
 
@@ -180,28 +162,28 @@ void InputMethodMenu() {
 	} while (choseMethod != ReturnMenu);
 }
 
-void CompleteControlWork(int** array, int rows, int columns) {
-	int** copyarray = nullptr; //передача двумерного массива в функцию
-	copyarray = new int* [rows];
+void CompleteControlWork(int* array, int  size) {
+	int* copyArray = nullptr; //передача одномерного массива в функцию
+	copyArray = new int[size];
 
-	for (int i = 0; i < rows; i++) {
-		copyarray[i] = new int[columns];
+	for (int i = 0; i < size; i++)
+	{
+		copyArray[i] = array[i];
 	}
 
 	cout << endl << "Исходный массив:" << endl;
-	PrintArray(array, rows, columns);
+	PrintArray(array, size);
+
 	cout << endl << "Сортировка вставками:" << endl;
-	CopyArray(copyarray, array, rows, columns);
 	InsertSort c;
-	c.Sort(copyarray, rows, columns);
-	PrintArray(copyarray, rows, columns);
+	c.Sort(copyArray, size);
+	PrintArray(copyArray, size);
 	cout << endl;
 }
 
 
 void StartProgram() {
 	setlocale(LC_ALL, "RU");
-	system("chcp 1251");
 	srand(static_cast<unsigned int>(time(NULL)));
 	int userChoise = 0;
 	do {
@@ -209,6 +191,7 @@ void StartProgram() {
 		ShowGreeting();
 		userChoise = CheckInt();
 		switch (userChoise) {
+
 		case StartProgramm:
 			InputMethodMenu();
 			break;

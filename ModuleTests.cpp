@@ -17,22 +17,23 @@ void CompleteModuleTests() {
 	}
 
 	if (filesExists) {
+
 		for (int t = 0; t < NumberOfTests; t++) {
 			string temp;
 			string value;
 			bool insertCorrect = true;
-			int finalRows = 0, finalColumns = 0;
-			int initialRows = 0, initialColumns = 0;
-			int** initialArray = nullptr;
-			int** finalArray = nullptr;
-			int** sortedArray = nullptr;
+			int finalSize = 0;
+			int initialSize = 0;
+			int* initialArray = nullptr;
+			int* finalArray = nullptr;
+			int* sortedArray = nullptr;
 			InsertSort c;
 			initial.open(initialPaths[t]);
 			final.open(finalPaths[t]);
 			int input = 0;
 
 			while (!initial.eof()) {
-				if ((input = initial.get()) == '\n' || input == EOF) { initialRows += 1; }
+				if ((input = initial.get()) == '\n' || input == EOF) { initialSize += 1; }
 			}
 
 			initial.clear();
@@ -40,57 +41,35 @@ void CompleteModuleTests() {
 			getline(initial, temp);
 			istringstream stream(temp);
 
-			while (stream >> value) {
-				initialColumns++;
-			}
-
 			initial.clear();
 			initial.seekg(0);
-			initialArray = new int* [initialRows];
+			initialArray = new int[initialSize];
 
-			for (int i = 0; i < initialRows; i++) {
-				initialArray[i] = new int[initialColumns];
-			}
+			final >> finalSize;
 
-			final >> finalRows;
-			final >> finalColumns;
-			finalArray = new int* [finalRows];
+			finalArray = new int[finalSize];
 
-			for (int i = 0; i < finalRows; i++) {
-				finalArray[i] = new int[finalColumns];
-			}
+			sortedArray = new int[initialSize];
 
-			sortedArray = new int* [initialRows];
-
-			for (int i = 0; i < initialRows; i++) {
-				sortedArray[i] = new int[initialColumns];
-			}
-
-			if (initialRows != finalRows || initialColumns != finalColumns) {
-				cout << "Количество строк или столбцов матрицы в " << initialPaths[t] << " не соответствует количеству строк или столбцов " << finalPaths[t] << endl;
+			if (initialSize != finalSize) {
+				cout << "Количество чисел в " << initialPaths[t] << " не соответствует количеству чисел " << finalPaths[t] << endl;
 				completeTests = false;
 			}
 			else {
-				for (int i = 0; i < initialRows; i++) {
-					for (int j = 0; j < initialColumns; j++) {
-						initial >> initialArray[i][j];
-					}
+				for (int i = 0; i < initialSize; i++) {
+					initial >> initialArray[i];
 				}
 
-				for (int i = 0; i < finalRows; i++) {
-					for (int j = 0; j < finalColumns; j++) {
-						final >> finalArray[i][j];
-					}
+				for (int i = 0; i < finalSize; i++) {
+					final >> finalArray[i];
 				}
 
-				CopyArray(sortedArray, initialArray, initialRows, initialColumns);
-				c.Sort(sortedArray, initialRows, initialColumns);
+				CopyArray(sortedArray, initialArray, initialSize);
+				c.Sort(sortedArray, initialSize);
 
-				for (int i = 0; i < initialRows; i++) {
-					for (int j = 0; j < initialColumns; j++) {
-						if (sortedArray[i][j] != finalArray[i][j]) {
-							insertCorrect = false;
-						}
+				for (int i = 0; i < initialSize; i++) {
+					if (sortedArray[i] != finalArray[i]) {
+						insertCorrect = false;
 					}
 				}
 
@@ -98,39 +77,32 @@ void CompleteModuleTests() {
 					completeTests = false;
 					cout << "Сортировка вставками работает некорректно." << endl;
 					cout << "Полученный массив:" << endl;
-					PrintArray(sortedArray, initialRows, initialColumns);
+					PrintArray(sortedArray, initialSize);
 					cout << "Ожидаемый массив:" << endl;
-					PrintArray(finalArray, initialRows, initialColumns);
+					PrintArray(finalArray, initialSize);
 				}
-				CopyArray(sortedArray, initialArray, initialRows, initialColumns);
+
+				CopyArray(sortedArray, initialArray, initialSize);
 			}
 
-			for (int i = 0; i < initialRows; i++) {
-				delete[] initialArray[i];
-				initialArray[i] = nullptr;
+			for (int i = 0; i < initialSize; i++) {
+				delete[] initialArray;
+				initialArray = nullptr;
 			}
 
-			delete[] initialArray;
-			initialArray = nullptr;
-
-			for (int i = 0; i < initialRows; i++) {
-				delete[] sortedArray[i];
-				sortedArray[i] = nullptr;
+			for (int i = 0; i < initialSize; i++) {
+				delete[] sortedArray;
+				sortedArray = nullptr;
 			}
 
-			delete[] sortedArray;
-			sortedArray = nullptr;
-
-			for (int i = 0; i < finalRows; i++) {
-				delete[] finalArray[i];
-				finalArray[i] = nullptr;
+			for (int i = 0; i < finalSize; i++) {
+				delete[] finalArray;
+				finalArray = nullptr;
 			}
-
-			delete[] finalArray;
-			finalArray = nullptr;
 			final.close();
 			initial.close();
 		}
+
 		if (completeTests) {
 			cout << "Все тесты прошли успешно!" << endl;
 		}
