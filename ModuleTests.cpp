@@ -1,4 +1,4 @@
-#include "moduletests.h"
+ï»¿#include "moduletests.h"
 #define NumberOfTests 5
 
 using namespace std;
@@ -52,7 +52,7 @@ void CompleteModuleTests() {
 			sortedArray = new int[initialSize];
 
 			if (initialSize != finalSize) {
-				cout << "Êîëè÷åñòâî ÷èñåë â " << initialPaths[t] << " íå ñîîòâåòñòâóåò êîëè÷åñòâó ÷èñåë " << finalPaths[t] << endl;
+				cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‡Ð¸ÑÐµÐ» Ð² " << initialPaths[t] << " Ð½Ðµ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ñƒ Ñ‡Ð¸ÑÐµÐ» " << finalPaths[t] << endl;
 				completeTests = false;
 			}
 			else {
@@ -75,10 +75,10 @@ void CompleteModuleTests() {
 
 				if (!insertCorrect) {
 					completeTests = false;
-					cout << "Ñîðòèðîâêà âñòàâêàìè ðàáîòàåò íåêîððåêòíî." << endl;
-					cout << "Ïîëó÷åííûé ìàññèâ:" << endl;
+					cout << "Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð²ÑÑ‚Ð°Ð²ÐºÐ°Ð¼Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ð½ÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ð¾." << endl;
+					cout << "ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð²:" << endl;
 					PrintArray(sortedArray, initialSize);
-					cout << "Îæèäàåìûé ìàññèâ:" << endl;
+					cout << "ÐžÐ¶Ð¸Ð´Ð°ÐµÐ¼Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð²:" << endl;
 					PrintArray(finalArray, initialSize);
 				}
 
@@ -104,10 +104,10 @@ void CompleteModuleTests() {
 		}
 
 		if (completeTests) {
-			cout << "Âñå òåñòû ïðîøëè óñïåøíî!" << endl;
+			cout << "Ð’ÑÐµ Ñ‚ÐµÑÑ‚Ñ‹ Ð¿Ñ€Ð¾ÑˆÐ»Ð¸ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾!" << endl;
 		}
 	}
 	else {
-		cout << "Íå îáíàðóæåíî ôàéëîâ äëÿ ïðîâåäåíèÿ ìîäóëüíûõ òåñòîâ! Ôàéëû äîëæíû íàçûâàòüñÿ: íà÷àëüíûå äàííûå - AB_1-AB_5, êîíå÷íûå - ABC_1-ABC_5" << endl;
+		cout << "ÐÐµ Ð¾Ð±Ð½Ð°Ñ€ÑƒÐ¶ÐµÐ½Ð¾ Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ñ Ð¼Ð¾Ð´ÑƒÐ»ÑŒÐ½Ñ‹Ñ… Ñ‚ÐµÑÑ‚Ð¾Ð²! Ð¤Ð°Ð¹Ð»Ñ‹ Ð´Ð¾Ð»Ð¶Ð½Ñ‹ Ð½Ð°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒÑÑ: Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ - AB_1-AB_5, ÐºÐ¾Ð½ÐµÑ‡Ð½Ñ‹Ðµ - ABC_1-ABC_5" << endl;
 	}
 }
