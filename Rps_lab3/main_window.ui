@@ -43,7 +43,7 @@
      </rect>
     </property>
     <property name="editTriggers">
-     <set>QAbstractItemView::NoEditTriggers</set>
+     <set>QAbstractItemView::CurrentChanged|QAbstractItemView::DoubleClicked</set>
     </property>
     <property name="dragEnabled">
      <bool>false</bool>
@@ -337,8 +337,6 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="resource.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
