@@ -1,4 +1,4 @@
-﻿#ifndef MAIN_WINDOW_H
+#ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
 
@@ -51,6 +51,11 @@ private slots:
 	/// Слот-функция, реагирующая на нажатие кнопки очистки таблицы. Очищает таблицу массивов.
 	/// </summary>
 	void clear_table_btn_clicked();
+
+	/// <summary>
+	/// Слот-функция, реагирующая на изменения данных в таблице.
+	/// </summary>
+	void handleItemChanged(QTableWidgetItem* item);
 
 private:
 	Ui::MainWindowClass *_ui;
