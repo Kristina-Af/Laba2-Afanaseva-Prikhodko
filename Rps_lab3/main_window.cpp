@@ -6,6 +6,8 @@
 #include <qmessagebox.h>
 #include <QIntValidator>
 #include <iostream>
+#include <qtablewidget.h>
+#include <sstream>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), _ui(new Ui::MainWindowClass()) {
 	// Инициализация главного окна
@@ -22,6 +24,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), _ui(new Ui::MainW
 	connect(_ui->sort_btn, &QPushButton::clicked, this, &MainWindow::sort_btn_clicked);
 	connect(_ui->clear_database_btn, &QPushButton::clicked, this, &MainWindow::clear_database_btn_clicked);
 	connect(_ui->clear_table_btn, &QPushButton::clicked, this, &MainWindow::clear_table_btn_clicked);
+	connect(_ui->output_table, &QTableWidget::itemChanged, this, &MainWindow::handleItemChanged);
 
 	// Установка ширины столбцов в QTableWidget
 	_ui->output_table->setColumnWidth(Array_data, 700);
@@ -233,5 +236,34 @@ void MainWindow::clearTableWidget() {
 		QTableWidgetItem* item = new QTableWidgetItem(QString::number(row + 1));
 		// Установка элемента в таблицу
 		_ui->output_table->setItem(row, 0, item);
+	}
+}
+
+void MainWindow::handleItemChanged(QTableWidgetItem* item) {
+	if (item) {
+		// Обрабатываем изменение данных в ячейке
+		int row = item->row();
+		int col = item->column();
+
+		// Проверяем, что изменения произошли в 1-м столбце (нумерация с 0)
+		if (col == 0) {
+			// Получаем значение из ячейки
+			std::string array_string = item->text().toStdString();
+			std::vector<int> array;
+
+			// Разбираем строку с числами в вектор
+			std::istringstream iss(array_string);
+			int number{};
+			while (iss >> number) {
+				array.push_back(number);
+			}
+			
+			// Замена изначального массива на отредактированный
+			_arrays[row] = array;
+
+			// Меняем данные о времени изменения и статуса сортировки массива
+			_ui->output_table->setItem(row, Change_date, new QTableWidgetItem(QString::fromStdString(getCurrentDateAndTime())));
+			_ui->output_table->setItem(row, Type, new QTableWidgetItem(QString::fromStdString(getArrayType(_arrays[row]))));
+		}
 	}
 }
